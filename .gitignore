@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.DS_Store
+# Raw downloads are re-creatable by running the loader, so keep them out of git
+data/*.csv
+docs/
+PROGRESS.md
