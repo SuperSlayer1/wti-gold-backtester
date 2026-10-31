@@ -81,6 +81,10 @@ Though what these strategies did do on WTI is reduce overall risk, with all stra
 
 Only one strategy met the significance value, however in a way we didn't want. The strategy, Momentum, on the asset Gold performed much worse than buy and hold, with real significance, below 0.05 and that of the Bonferroni corrected significant value, displaying that this strategy genuinely performs worse over this sample than buying and holding on Gold ( CAGR of 2.5% vs 12.5% and Sharpe of 0.26 vs 0.84 whilst also having a deeper max drawdown)
 
+I was also very surprised with how fast trading fees can eat into a lead. Whilst on the WTI Momentum and WTI Trend following strategies the trading fees can reach up to 27 bp and 99 bp respectively before the lead is gone, mostly due to either a low number of trades per year or a large lead, on WTI Mean Reversion, the "Break-even" was only 0.5 bp. This essentially means that the lead the strategy had would be nullified by a trading fee of 0.5 basis points per trade. This is significant as large traders typically pay around 1-5 bp, so Mean Reversion simply has no lead over buy and hold as it would be taken up by the trading fee and would not survive realistic costs. Whilst there was really no lead in the first place, it brings to attention that the lead and number of trades together decide whether the lead stays. I didn't include costs on the table for Gold as none of the strategies were ahead of buy and hold, so it would've had no effect on the result. However, since none of the WTI leads were statistically significant, surviving costs doesn't mean any strategy can be proven better than buy and hold either.
+
+Skew also matters because it exposes a lot of information that the t-test ignores. Skew is a measure of whether a strategy's extreme days tend to be gains or losses. However, to the t-test two strategies with very different skew can still look the same based off of their average returns. In essence, a strategy that occasionally crashes is treated the same as one that doesn't. For example, WTI Mean Reversion had a skew of -0.65 as it kept buying into the COVID oil collapse, taking the full -45% loss of 21st April 2020. Momentum avoided that crash entirely as it was out of the market as oil had been falling for weeks, so its rule (price is above that of 20 days earlier) had taken action, and its skew was only -0.11. On Gold, however, the dip buying rule showed the opposite pattern and actually earned money on Gold during the COVID period, earning the strategy a skew of +0.68. A handful of days drive these numbers so they may not repeat in another period.
+
 
 ## 7. Limitations
 
@@ -94,7 +98,6 @@ Only one strategy met the significance value, however in a way we didn't want. T
 - The price jump between contracts as a result of the data being from continuous futures may affect the results of the experiment
 
 - When flat, money doesn't sit, it is also affected by interest when sitting in the bank, this isn't accounted for and could potentially change the equation (money that is flat here earns 0% when it may be earning X% interest depending on the rates)
-
 
 ## 8. Next steps
 
