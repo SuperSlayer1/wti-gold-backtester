@@ -10,7 +10,7 @@ No, none of the three rules beat buy and hold significantly on either asset, wit
 ## 1. The question
 
 
-The question that this project is used to answer is whether the following strategies perform better than just buying and holding the assets Gold and WTI (West Texas Intermediate): 20 day momentum , Mean Reversion and Trend following. All these strategies are explained below.
+The question that this project is used to answer is whether the following strategies perform better than just buying and holding the assets Gold and WTI (West Texas Intermediate): 20 day momentum, Mean Reversion and Trend following. All these strategies are explained below.
 
 
 ## 2. Data
@@ -33,7 +33,7 @@ After removing this date, I checked the extremes of the data, ensuring the worst
 |  Buy and hold    | Buy with £1 on day 1 and hold                                                                          |
 |  20-day momentum | buy if today's price is above the price 20 days ago, otherwise flat                                    |
 |  Mean reversion  | find the z score of todays price compared to the 20 day mean, buy if less than -1 sell when 0 or more  |
-|  Trend following | buy when 50 day moving average exceeds that of 200 day                                                 |
+|  Trend following | buy when 50 day moving average exceeds that of 200 day otherwise flat                                  |
 
 All the strategies are either long or flat, never short. All the parameters were fixed in advance (20 day means and returns etc) to avoid overfitting as a result of tuning
 
@@ -62,7 +62,7 @@ I tested six strategy-asset pairs, calculating the daily difference between the 
 | Gold  | Mean reversion| 5.6% | 8.3%       | 0.70   | −11.1%       | 14        | 0.066   | No           | —               |
 | Gold  | Trend 50/200  | 8.6% | 13.2%      | 0.69   | −28.9%       | 1.4       | 0.11    | No           | —               |
 
-Some strategies in the table look more promising than others and may mislead one to believe that they should be better, for example WTI - momentum. it looks the most promising out of all strategies with a high Sharpe and CAGR percentage, however the p value of 0.85 after the t-test indicates that this case of outperformance can't be differentiated from pure luck. Adding to that, despite the CAGR of Momentum on WTI being 9x higher than buy and hold, the average daily difference, annualised, is -2.3% a year (not on table; from step 6). This is explained later. Another thing that can be noticed is how all strategies appear to perform worse than buying and holding on Gold, though only one strategy is statistically significant: Momentum; meeting both the significance level of 0.05 and the Bonferroni corrected significance.
+Some strategies in the table look more promising than others and may mislead one to believe that they should be better, for example WTI - momentum. It looks the most promising out of all strategies with a high Sharpe and CAGR percentage, however the p value of 0.85 after the t-test indicates that this case of outperformance can't be differentiated from pure luck. Adding to that, despite the CAGR of Momentum on WTI being 9x higher than buy and hold, the average daily difference, annualised, is -2.3% a year (not on table; from step 6). This is explained later. Another thing that can be noticed is how all strategies appear to perform worse than buying and holding on Gold, though only one strategy is statistically significant: Momentum; meeting both the significance level of 0.05 and the Bonferroni corrected significance.
 
 
 ![Buy-and-hold equity curves](plots/buy_and_hold.png)
@@ -73,11 +73,11 @@ Some strategies in the table look more promising than others and may mislead one
 ## 6. What I found
 
 
-As mentioned before, some strategies appeared to perform much better than buy and hold, especially on WTI, with higher CAGR percentages across the board and one strategy possession a higher Sharpe ration than buy and hold, however, the t-tests surprisingly reveal that this can't be distinguished from luck, with extremely high p values (0.85 0.57) exhibiting this characteristic.
+As mentioned before, some strategies appeared to perform much better than buy and hold, especially on WTI, with higher CAGR percentages across the board and one strategy possessing a higher Sharpe ratio than buy and hold, however, the t-tests surprisingly reveal that this can't be distinguished from luck, with extremely high p values (0.85, 0.57) exhibiting this characteristic.
 
 Returning to the daily difference issue from the Results section, after some research, I found this comes as a result of Volatility drag. Buy and hold has 47.5% Volatility which costs roughly 11% a year of compounding (vol^2/2). Momentum almost halves that volatility so is exposed to much less drag, increasing its CAGR. Therefore, the higher CAGR comes from avoiding big swings, not from picking better days. This is the cause of the extremely high p value of 0.85 as the t-test compares average daily returns and doesn't see the advantage.
 
-Though what these strategies did do on WTI is reduced overall risk, with all strategies experiencing a lesser maximum drawdown and lesser volatility across the board, though this wasn't accounted for in the t-test which compared mean returns
+Though what these strategies did do on WTI is reduce overall risk, with all strategies experiencing a lesser maximum drawdown and lesser volatility across the board, though this wasn't accounted for in the t-test which compared mean returns
 
 Only one strategy met the significance value, however in a way we didn't want. The strategy, Momentum, on the asset Gold performed much worse than buy and hold, with real significance, below 0.05 and that of the Bonferroni corrected significant value, displaying that this strategy genuinely performs worse over this sample than buying and holding on Gold ( CAGR of 2.5% vs 12.5% and Sharpe of 0.26 vs 0.84 whilst also having a deeper max drawdown)
 
